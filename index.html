@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Vendor E-Commerce Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .tab-active {
+            color: rgb(79 70 229);
+            border-bottom: 4px solid rgb(79 70 229);
+        }
+        
+        .tab-inactive {
+            color: rgb(75 85 99);
+        }
+        
+        .tab-inactive:hover {
+            color: rgb(79 70 229);
+        }
+        
+        .section-content {
+            display: none;
+        }
+        
+        .section-content.active {
+            display: block;
+        }
+        
+        .module-card {
+            transition: all 0.3s ease;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .table-item {
+            transition: all 0.3s ease;
+        }
+        
+        .table-item:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-2xl">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-4xl font-bold mb-2">🏪 Multi-Vendor E-Commerce Platform</h1>
+                    <p class="text-indigo-100 text-lg">نظام متجر إلكتروني متعدد البائعين - مستوى Enterprise</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold">151</div>
+                    <div class="text-indigo-200">جدول قاعدة بيانات</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-reverse space-x-2 overflow-x-auto">
+                <button onclick="showSection('overview')" class="tab tab-active px-6 py-4 font-semibold whitespace-nowrap transition-all" data-section="overview">
+                    📋 نظرة عامة
+                </button>
+                <button onclick="showSection('modules')" class="tab tab-inactive px-6 py-4 font-semibold whitespace-nowrap transition-all" data-section="modules">
+                    🧩 الوحدات
+                </button>
+                <button onclick="showSection('tables')" class="tab tab-inactive px-6 py-4 font-semibold whitespace-nowrap transition-all" data-section="tables">
+                    🗄️ الجداول
+                </button>
+                <button onclick="showSection('users')" class="tab tab-inactive px-6 py-4 font-semibold whitespace-nowrap transition-all" data-section="users">
+                    👥 المستخدمين
+                </button>
+                <button onclick="showSection('features')" class="tab tab-inactive px-6 py-4 font-semibold whitespace-nowrap transition-all" data-section="features">
+                    ⚙️ المكونات
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 py-8">
+        
+        <!-- Overview Section -->
+        <div id="overview-section" class="section-content active animate-fadeIn">
+            <div class="space-y-6">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">🎯 فكرة المشروع</h2>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        منصة إلكترونية شاملة للتجارة الإلكترونية تتيح للبائعين عرض منتجاتهم وبيعها للعملاء داخل نظام واحد، 
+                        مع وجود لوحة تحكم قوية للإدارة. المنصة تعمل كوسيط بين البائعين والمشترين وتوفر جميع الخدمات 
+                        الأساسية مثل إدارة المنتجات، الطلبات، الشحن، والدفع الإلكتروني.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">💡 أهداف النظام</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="flex items-start space-x-reverse space-x-3 p-4 bg-indigo-50 rounded-xl">
+                            <span class="text-2xl">✓</span>
+                            <p class="text-gray-700">إنشاء متجر إلكتروني احترافي يشبه Amazon / Noon / Jumia</p>
+                        </div>
+                        <div class="flex items-start space-x-reverse space-x-3 p-4 bg-indigo-50 rounded-xl">
+                            <span class="text-2xl">✓</span>
+                            <p class="text-gray-700">تمكين البائعين المستقلين من بيع منتجاتهم داخل المنصة</p>
+                        </div>
+                        <div class="flex items-start space-x-reverse space-x-3 p-4 bg-indigo-50 rounded-xl">
+                            <span class="text-2xl">✓</span>
+                            <p class="text-gray-700">توفير تجربة تسوق متكاملة للعملاء</p>
+                        </div>
+                        <div class="flex items-start space-x-reverse space-x-3 p-4 bg-indigo-50 rounded-xl">
+                            <span class="text-2xl">✓</span>
+                            <p class="text-gray-700">تقديم لوحة تحكم متقدمة للأدمن</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl shadow-xl p-8 text-center">
+                        <div class="text-6xl font-bold mb-2">151</div>
+                        <div class="text-xl">جدول قاعدة بيانات</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-2xl shadow-xl p-8 text-center">
+                        <div class="text-6xl font-bold mb-2">9</div>
+                        <div class="text-xl">وحدة رئيسية</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-500 to-teal-600 text-white rounded-2xl shadow-xl p-8 text-center">
+                        <div class="text-6xl font-bold mb-2">3</div>
+                        <div class="text-xl">أنواع المستخدمين</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modules Section -->
+        <div id="modules-section" class="section-content">
+            <div class="space-y-6 animate-fadeIn">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">🧩 الوحدات الرئيسية للنظام</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="modules-container"></div>
+            </div>
+        </div>
+
+        <!-- Tables Section -->
+        <div id="tables-section" class="section-content">
+            <div class="space-y-6 animate-fadeIn">
+                <div class="bg-white rounded-2xl shadow-xl p-6">
+                    <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+                        <h2 class="text-3xl font-bold text-gray-800">🗄️ جميع جداول قاعدة البيانات</h2>
+                        <div class="relative flex-1 max-w-md">
+                            <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <input
+                                type="text"
+                                id="searchInput"
+                                placeholder="ابحث عن جدول..."
+                                class="w-full pr-10 pl-4 py-3 border-2 border-gray-200 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                oninput="filterTables()"
+                            />
+                        </div>
+                    </div>
+                    <div id="searchResults" class="mb-4 text-gray-600" style="display: none;"></div>
+                </div>
+                <div class="space-y-6" id="tables-container"></div>
+                <div id="noResults" class="bg-white rounded-2xl shadow-lg p-12 text-center" style="display: none;">
+                    <div class="text-6xl mb-4">🔍</div>
+                    <h3 class="text-2xl font-bold text-gray-700 mb-2">لا توجد نتائج</h3>
+                    <p class="text-gray-500">جرب البحث بكلمات مختلفة</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Section -->
+        <div id="users-section" class="section-content">
+            <div class="space-y-6 animate-fadeIn">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">👥 أنواع المستخدمين في النظام</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    
+                    <!-- Customer -->
+                    <div class="bg-blue-100 border-blue-300 border-2 rounded-2xl shadow-lg p-6">
+                        <div class="text-center mb-4">
+                            <div class="text-6xl mb-3">👤</div>
+                            <h3 class="text-2xl font-bold text-gray-800">العميل</h3>
+                            <p class="text-gray-600 font-mono text-sm">Customer</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">تصفح المنتجات</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">إضافة للعربة والمفضلة</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">إتمام الشراء</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">تتبع الطلبات</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">كتابة التقييمات</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vendor -->
+                    <div class="bg-green-100 border-green-300 border-2 rounded-2xl shadow-lg p-6">
+                        <div class="text-center mb-4">
+                            <div class="text-6xl mb-3">🏪</div>
+                            <h3 class="text-2xl font-bold text-gray-800">البائع</h3>
+                            <p class="text-gray-600 font-mono text-sm">Vendor</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">لوحة تحكم خاصة</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">إدارة المنتجات</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">متابعة المبيعات</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">استلام الأرباح</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">إدارة الموظفين</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Admin -->
+                    <div class="bg-purple-100 border-purple-300 border-2 rounded-2xl shadow-lg p-6">
+                        <div class="text-center mb-4">
+                            <div class="text-6xl mb-3">👨‍💼</div>
+                            <h3 class="text-2xl font-bold text-gray-800">المدير</h3>
+                            <p class="text-gray-600 font-mono text-sm">Admin</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">صلاحيات شاملة</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">إدارة المستخدمين</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">مراجعة الطلبات</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">التحكم في الإعدادات</span>
+                            </div>
+                            <div class="flex items-center space-x-reverse space-x-2 bg-white bg-opacity-60 rounded-lg p-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-gray-700 text-sm">التقارير والتحليلات</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div id="features-section" class="section-content">
+            <div class="space-y-6 animate-fadeIn">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">⚙️ المكونات الأساسية للنظام</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl ml-3">👤</span>
+                            <h3 class="text-xl font-bold text-gray-800">إدارة المستخدمين</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                تسجيل الدخول والتسجيل
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                إدارة الصلاحيات
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                ملفات المستخدمين
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl ml-3">📦</span>
+                            <h3 class="text-xl font-bold text-gray-800">إدارة المنتجات</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                التصنيفات والأقسام
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                تفاصيل المنتج
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                التقييمات والتعليقات
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl ml-3">🛒</span>
+                            <h3 class="text-xl font-bold text-gray-800">إدارة الطلبات</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                إنشاء الطلبات
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                تتبع الحالة
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                سجل الطلبات
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl ml-3">💳</span>
+                            <h3 class="text-xl font-bold text-gray-800">الدفع والشحن</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                بوابات الدفع
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                حساب الشحن
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                تتبع التوصيل
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl ml-3">🎁</span>
+                            <h3 class="text-xl font-bold text-gray-800">العروض والتسويق</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                كوبونات الخصم
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                البنرات الترويجية
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                التسويق بالعمولة
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl ml-3">💬</span>
+                            <h3 class="text-xl font-bold text-gray-800">دعم العملاء</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                نظام الشكاوى
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                الإشعارات
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                الدردشة المباشرة
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl ml-3">📊</span>
+                            <h3 class="text-xl font-bold text-gray-800">التقارير والتحليلات</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                تقارير المبيعات
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                تحليل السلوك
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <span class="text-indigo-500 ml-2">▸</span>
+                                مراقبة الأداء
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg mb-2">Multi-Vendor E-Commerce Platform</p>
+            <p class="text-gray-400 text-sm">نظام متكامل على مستوى Enterprise - 151 جدول قاعدة بيانات</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data
+        const modules = [
+            {
+                id: 1,
+                icon: "🛒",
+                title: "النواة الأساسية",
+                subtitle: "Core E-Commerce",
+                tables: 31,
+                color: "from-blue-500 to-blue-600",
+                description: "أساس المنصة الكامل - إدارة المستخدمين، البائعين، المنتجات، والكتالوج",
+                details: "تشمل هيكل المستخدمين والصلاحيات، كتالوج المنتجات الكامل بالتصنيفات والماركات، نظام المتغيرات المعقد (ألوان وأحجام)، وتجربة العميل الأساسية",
+                allTables: ["users", "profiles", "vendors", "vendor_branches", "vendor_documents", "roles", "permissions", "vendor_ratings", "categories", "subcategories", "products", "product_images", "product_attributes", "product_attribute_values", "product_variants", "product_tags", "product_reviews", "product_questions", "product_answers", "product_discounts", "product_inventory", "product_inventory_logs", "brands", "coupons", "coupon_usage", "carts", "cart_items", "wishlists", "wishlist_items", "comparisons", "recently_viewed"]
+            },
+            {
+                id: 2,
+                icon: "📦",
+                title: "الطلبات والمدفوعات",
+                subtitle: "Orders & Payments",
+                tables: 20,
+                color: "from-orange-500 to-orange-600",
+                description: "جوهر عملية البيع - إدارة الطلبات، المدفوعات، الفواتير، والإرجاع",
+                details: "فصل الطلب إلى شحنات مستقلة لكل بائع، إدارة طرق الدفع والبوابات، تتبع المعاملات، ومرحلة ما بعد البيع الكاملة",
+                allTables: ["orders", "order_items", "order_status_logs", "order_shipments", "order_invoices", "order_returns", "order_refunds", "order_cancellations", "order_tracking", "payments", "payment_methods", "payment_transactions", "payment_gateways", "invoices", "invoice_items", "refunds", "refund_items", "taxes", "discounts_applied", "loyalty_points"]
+            },
+            {
+                id: 3,
+                icon: "🚚",
+                title: "الشحن واللوجستيات",
+                subtitle: "Shipping & Logistics",
+                tables: 15,
+                color: "from-yellow-500 to-yellow-600",
+                description: "كيف تصل المنتجات للعميل - الشحن، المخزون، والتوصيل",
+                details: "تحديد مزودي الشحن والتكاليف، إدارة المستودعات والمخزون، تتبع الشحنات، ومناديب التوصيل",
+                allTables: ["shipping_methods", "shipping_providers", "shipping_zones", "shipping_rates", "shipping_addresses", "tracking_updates", "delivery_agents", "delivery_routes", "warehouses", "warehouse_stock", "warehouse_zones", "warehouse_transfers", "packaging_types", "packaging_logs", "pickup_points"]
+            },
+            {
+                id: 4,
+                icon: "💰",
+                title: "إدارة البائعين",
+                subtitle: "Vendor Management",
+                tables: 15,
+                color: "from-green-500 to-green-600",
+                description: "لوحة التحكم الكاملة للبائع - المحفظة، الأرباح، والإدارة",
+                details: "النظام المالي الكامل للبائع، محفظته الداخلية، سحب الأرباح، الباقات والاشتراكات، وإدارة الموظفين",
+                allTables: ["vendor_accounts", "vendor_wallets", "vendor_payouts", "vendor_sales_reports", "vendor_settlements", "vendor_disputes", "vendor_analytics", "vendor_subscriptions", "vendor_subscription_plans", "vendor_announcements", "vendor_support_tickets", "vendor_promotions", "vendor_staff", "vendor_roles", "vendor_permissions"]
+            },
+            {
+                id: 5,
+                icon: "💬",
+                title: "تجربة العميل",
+                subtitle: "Customer Experience",
+                tables: 15,
+                color: "from-blue-400 to-blue-500",
+                description: "كل تفاعلات العميل - الإشعارات، الدردشة، والدعم الفني",
+                details: "نظام الإشعارات والدردشة المباشرة، تذاكر الدعم الفني، وتخصيص التجربة بناءً على السلوك",
+                allTables: ["addresses", "notifications", "messages", "chat_sessions", "chat_messages", "favorites", "search_history", "browsing_history", "saved_searches", "feedback", "support_tickets", "ticket_replies", "returns_requests", "reviews_reports", "customer_segments"]
+            },
+            {
+                id: 6,
+                icon: "📢",
+                title: "التسويق والإعلانات",
+                subtitle: "Marketing & Advertising",
+                tables: 15,
+                color: "from-purple-500 to-purple-600",
+                description: "وحدة النمو - الإعلانات، البانرات، والتسويق بالعمولة",
+                details: "البانرات الإعلانية، الإعلانات المدفوعة للبائعين، نظام الأفلييت الكامل، والحملات التسويقية",
+                allTables: ["banners", "banner_positions", "marketing_campaigns", "campaign_channels", "email_templates", "sms_templates", "push_notifications", "seo_settings", "ads", "ad_clicks", "ad_impressions", "promotions", "affiliate_programs", "affiliate_users", "affiliate_commissions"]
+            },
+            {
+                id: 7,
+                icon: "📊",
+                title: "التحليلات والتقارير",
+                subtitle: "Analytics & Reports",
+                tables: 10,
+                color: "from-pink-500 to-pink-600",
+                description: "لوحة العدادات - الإحصائيات، التقارير، والتحليلات",
+                details: "ملخصات الأداء الدورية، سجلات الحركة التفصيلية، السلات المتروكة، وتقارير الإيرادات",
+                allTables: ["site_statistics", "traffic_logs", "sales_reports", "user_activity_logs", "conversion_rates", "abandoned_carts", "retention_reports", "product_performance", "revenue_reports", "system_events"]
+            },
+            {
+                id: 8,
+                icon: "⚙️",
+                title: "النظام والإعدادات",
+                subtitle: "System & Settings",
+                tables: 20,
+                color: "from-gray-600 to-gray-700",
+                description: "عقل المنصة - الإعدادات، اللغات، والتكاملات",
+                details: "الإعدادات العامة، التدويل والترجمات، إدارة API، الوسائط، وسجلات الإيميلات والرسائل",
+                allTables: ["settings", "system_logs", "error_logs", "api_keys", "integrations", "third_party_services", "webhooks", "backups", "audit_trails", "sessions", "tokens", "cron_jobs", "email_logs", "sms_logs", "cache_store", "file_uploads", "media_library", "translations", "languages", "currencies"]
+            },
+            {
+                id: 9,
+                icon: "🛡️",
+                title: "الأمن والامتثال",
+                subtitle: "Security & Compliance",
+                tables: 10,
+                color: "from-red-500 to-red-600",
+                description: "درع المنصة - الحماية، المراقبة، والخصوصية",
+                details: "تتبع محاولات الدخول، حظر IP المشبوه، الامتثال لـ GDPR، وسجلات التدقيق الحساسة",
+                allTables: ["user_sessions", "login_attempts", "blocked_ips", "firewalls", "gdpr_requests", "data_exports", "user_consents", "role_changes", "permission_logs", "account_verifications"]
+            }
+        ];
+
+        let selectedModuleId = null;
+
+        // Functions
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionName + '-section');
+            targetSection.classList.add('active');
+            
+            // Update tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('tab-active');
+                tab.classList.add('tab-inactive');
+            });
+            const activeTab = document.querySelector(`[data-section="${sectionName}"]`);
+            activeTab.classList.remove('tab-inactive');
+            activeTab.classList.add('tab-active');
+            
+            // Load content if needed
+            if (sectionName === 'modules') {
+                renderModules();
+            }
+            if (sectionName === 'tables') {
+                renderTables();
+            }
+        }
+
+        function renderModules() {
+            const container = document.getElementById('modules-container');
+            if (container.innerHTML) return; // Already rendered
+            
+            container.innerHTML = modules.map(module => `
+                <div class="module-card bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all cursor-pointer ${selectedModuleId === module.id ? 'ring-4 ring-indigo-400' : ''}"
+                     onclick="toggleModule(${module.id})">
+                    <div class="bg-gradient-to-r ${module.color} text-white p-6 rounded-t-2xl">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-4xl">${module.icon}</span>
+                            <span class="text-3xl font-bold">${module.tables}</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-1">${module.title}</h3>
+                        <p class="text-sm opacity-90">${module.subtitle}</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-4">${module.description}</p>
+                        <div id="module-details-${module.id}" style="display: none;" class="space-y-4 animate-fadeIn">
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">📝 التفاصيل:</h4>
+                                <p class="text-sm text-gray-600">${module.details}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleModule(moduleId) {
+            const detailsDiv = document.getElementById(`module-details-${moduleId}`);
+            
+            if (selectedModuleId === moduleId) {
+                detailsDiv.style.display = 'none';
+                selectedModuleId = null;
+            } else {
+                // Hide all other details
+                modules.forEach(m => {
+                    const div = document.getElementById(`module-details-${m.id}`);
+                    if (div) div.style.display = 'none';
+                });
+                detailsDiv.style.display = 'block';
+                selectedModuleId = moduleId;
+            }
+            
+            // Update card styling
+            document.querySelectorAll('.module-card').forEach((card, index) => {
+                if (modules[index].id === selectedModuleId) {
+                    card.classList.add('ring-4', 'ring-indigo-400');
+                } else {
+                    card.classList.remove('ring-4', 'ring-indigo-400');
+                }
+            });
+        }
+
+        function renderTables(searchTerm = '') {
+            const container = document.getElementById('tables-container');
+            const noResults = document.getElementById('noResults');
+            
+            let modulesToShow = modules;
+            
+            if (searchTerm) {
+                modulesToShow = modules.map(module => ({
+                    ...module,
+                    filteredTables: module.allTables.filter(table => 
+                        table.toLowerCase().includes(searchTerm.toLowerCase())
+                    )
+                })).filter(module => module.filteredTables.length > 0);
+                
+                if (modulesToShow.length === 0) {
+                    noResults.style.display = 'block';
+                    container.innerHTML = '';
+                    return;
+                }
+            }
+            
+            noResults.style.display = 'none';
+            
+            container.innerHTML = modulesToShow.map(module => {
+                const tablesToShow = searchTerm ? module.filteredTables : module.allTables;
+                return `
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center gap-4 mb-6 pb-4 border-b-2 border-gray-100">
+                            <div class="p-3 bg-gradient-to-r ${module.color} rounded-xl text-white text-4xl">
+                                ${module.icon}
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-gray-800">${module.title}</h3>
+                                <p class="text-gray-600">${module.subtitle}</p>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-3xl font-bold text-gray-800">${tablesToShow.length}</div>
+                                <div class="text-gray-500 text-sm">جدول</div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                            ${tablesToShow.map(table => `
+                                <div class="table-item group relative bg-gradient-to-br from-gray-50 to-gray-100 hover:from-indigo-50 hover:to-purple-50 rounded-lg p-3 transition-all duration-300 cursor-pointer border border-gray-200 hover:border-indigo-300">
+                                    <div class="flex items-center gap-2">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-indigo-500 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                                        </svg>
+                                        <span class="text-sm font-mono text-gray-700 group-hover:text-indigo-600 font-medium break-all">
+                                            ${table}
+                                        </span>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterTables() {
+            const searchTerm = document.getElementById('searchInput').value;
+            const searchResults = document.getElementById('searchResults');
+            
+            if (searchTerm) {
+                const totalResults = modules.reduce((sum, module) => {
+                    const filtered = module.allTables.filter(table => 
+                        table.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                    return sum + filtered.length;
+                }, 0);
+                
+                searchResults.style.display = 'block';
+                searchResults.textContent = `نتائج البحث: ${totalResults} جدول`;
+            } else {
+                searchResults.style.display = 'none';
+            }
+            
+            renderTables(searchTerm);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('overview');
+        });
+    </script>
+</body>
+</html>
